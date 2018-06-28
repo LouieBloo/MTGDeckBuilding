@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import * as Magic from 'mtgsdk-ts';
+import {Cards, Card, CardFilter} from 'mtgsdk-ts';
+import { Observable ,from} from 'rxjs';
+//  import 'rxjs/add/observable/of';
 //import Magic = require("mtgsdk-ts");
+
 
 
 @Injectable({
@@ -8,17 +11,23 @@ import * as Magic from 'mtgsdk-ts';
 })
 export class SearchCardsService {
 
-  constructor() { }
+  constructor() {}
 
-  searchForCard(){
-    console.log("testing");
+  search(filter:CardFilter):Observable<Card[]>{
+    return from(
+     Cards.where(filter).then(results => {
+       return results;
+      })
+    );
+  }
 
-
-    
-    if(Magic != null)
-    {
-      console.log("not null luke!");
-    }
-    //Magic.Cards.find("08618f8d5ebdc0c4d381ad11f0563dfebb21f4ee").then(result => console.log(result.name)); // Blood Scrivener
+  getByID(id:string): Observable<Card>{
+    return from(
+      Cards.find(id).then(card =>{
+        return card;
+      }).catch(exception =>{
+        return null;
+      })
+    );
   }
 }

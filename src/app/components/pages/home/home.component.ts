@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   constructor(private CardAPI : SearchCardsService) { }
 
   ngOnInit() {
-    this.CardAPI.searchForCard();
+    //this.CardAPI.searchByName("Elves");
   }
 
 }

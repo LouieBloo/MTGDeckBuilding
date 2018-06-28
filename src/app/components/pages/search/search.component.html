@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-12">
+    <h1>Search Results: {{query}}</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+
+    <h4>Filter <small class="text-muted tx-">(only legal cards)</small></h4>
+
+    <form #filterForm = "ngForm" (change)="fetchResults()">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" value="Standard" id="Standard" name="format" [(ngModel)]="format">
+        <label class="form-check-label" for="Standard">Standard</label>
+      </div>
+      <div class="form-check">
+          <input class="form-check-input" type="radio" value="Modern" id="Modern" name="format" [(ngModel)]="format">
+          <label class="form-check-label" for="Modern">Modern</label>
+      </div>
+      <div class="form-check">
+          <input class="form-check-input" type="radio" value="Legacy" id="Legacy" name="format" [(ngModel)]="format">
+          <label class="form-check-label" for="Legacy">Legacy</label>
+      </div>
+      <div class="form-check">
+          <input class="form-check-input" type="radio" value="Vintage" id="Vintage" name="format" [(ngModel)]="format">
+          <label class="form-check-label" for="Vintage">Vintage</label>
+      </div>
+      <div class="form-check">
+          <input class="form-check-input" type="radio" value="" id="None" name="format" [(ngModel)]="format">
+          <label class="form-check-label" for="None">None</label>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <app-single-card *ngFor="let card of searchResults" id={{card.id}} class="col-md-3"></app-single-card>
+</div>
